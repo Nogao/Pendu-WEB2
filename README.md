@@ -1,5 +1,5 @@
 # Pendu-WEB2
-ÉNONCÉ
+###ÉNONCÉ
 ======
 Jeu de pendu en ES
 -> Cinq mots pré-enregistrés

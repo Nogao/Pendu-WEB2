@@ -1,0 +1,99 @@
+<!doctype html>
+
+<html>
+	<head>
+		<title>Pendu - WEB2</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0">
+		<style>
+            div {
+                width: 30%;
+                margin: 0 auto;
+                display: flex;
+                flex-wrap: wrap;
+            }
+            h1 {
+                margin-top: 40%;
+                text-align: center;
+            }
+            p {
+                width: 100%;
+                text-align: center;
+            }
+            input[type="text"] {
+                width: 100%;
+                margin: 10% 0;
+            }
+            input[type="submit"] {
+                width: 20%;
+                margin: 0 auto; 
+            }
+        </style>
+	</head>
+
+	<body>
+        <div>
+            <h3>Guess this Lord of the Rings Character's name</h3>
+            <p id="wordContainer"></p>
+            <input type="text" maxlength="1">
+            <input type="submit" value="Vérifier">
+        </div>
+	</body>
+	<script>
+        var wordContainer = document.querySelector("#wordContainer");
+        var input = document.querySelector("input[type='text']");
+        var btn = document.querySelector("input[type='submit']");
+        var wordPossibilities = ["GANDALF", "ARAGORN", "FRODO", "LEGOLAS", "GIMLI"];
+        var wordHidden = "";
+        var lives = 10;
+        var indexes = [];
+        
+        var randomIndex = Math.random() * 4;
+        var wordGuess = wordPossibilities[Math.round(randomIndex)];
+        
+        
+        for (var i = 0; i < wordGuess.length; i++) {
+            wordHidden += "_";
+            wordContainer.innerHTML = wordHidden;
+        }
+        
+        function findLetter (word, letter) {
+            console.log(word);
+            console.log(letter);
+            if (lives <= 0) {
+                wordContainer.innerHTML = "GAME OVER";
+            }
+            for (var i = 0; i < word.length; i++) {
+                console.log(word[i]);
+                console.log(letter);
+                if (word[i] === letter.uppercase) {
+                    indexes.push(i);
+                }
+            }
+            if (indexes.length === 0) {
+                lives--;
+                console.log("Rien trouvé");
+            } else {
+                return indexes;
+            }
+            console.log(indexes);
+        }
+        
+//        function replaceFoundLetter (word, wordHidden, indexes) {
+//            wordHidden = wordHidden.split('');
+//            word = word.split('');
+//            for (var i = 0; i < indexes.length; i++) {
+//                var value = indexes[i];
+//                wordHidden[value] = word[value];
+//            }
+//            wordHidden = wordHidden.join('');
+//            return wordHidden;
+//        }
+        
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            findLetter(wordGuess, input.value);
+        });
+        
+    </script>
+</html>
